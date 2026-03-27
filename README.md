@@ -43,6 +43,7 @@ Monday hadir untuk membantu menngelola data baranngn dan transaksi pada gudanng 
 ## ERD
 
 - User (Pengguna)
+- Products (Produk)
 - Merchants (Toko/Gerai)
 - Warehouse (Gudang)
 - Transaction (Transaksi)
@@ -66,8 +67,11 @@ Monday hadir untuk membantu menngelola data baranngn dan transaksi pada gudanng 
 - Product (1) -> WarehouseProduct (N)
 - Warehouse (1) -> WarehouseProduct (N)
 - Product (N) -> Merchants (M) => 1 Product bisa dimiliki oleh banyak Merchants, dan 1 Merchants bisa memiliki banyak Product (Butuh table Pivot)
-- Product (1) -> MerchantsProducts (N)
-- Merchants (1) -> MerchantsProducts (N)
+- Product (1) -> Stock (N)
+- Merchants (1) -> Stock (N)
 - Product (N) -> Transaction (M) => 1 Product bisa berada dalam banyak transaksi, dan 1 Transaksi bisa terdiri dari banyak Product (Butuh table Pivot)
 - Product (1) -> TransactionProducts (N)
 - Transaction (1) -> TransactionProducts (N)
+- Warehouse (N) -> Merchants (M) => 1 Warehouse bisa mengisi banyak merchants, dan 1 merchants bisa diisi banyak warehouse (Butuh table pivot)
+- Warehouse (1) -> Stock (N)
+- Merchants (1) -> Stock (N)
