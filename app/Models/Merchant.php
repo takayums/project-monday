@@ -7,20 +7,23 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Storage;
 
-#[Fillable(['name', 'address', 'photo', 'phone', 'keeper_id'])];
+#[Fillable(['name', 'address', 'photo', 'phone', 'keeper_id'])]
 class Merchant extends Model
 {
     use SoftDeletes;
 
-    public function keeper(){
+    public function keeper()
+    {
         return $this->belongsTo(User::class, 'keeper_id');
     }
 
-    public function products(){
+    public function products()
+    {
         return $this->belongsToMany(Product::class, 'merchant_products')->withPivot('stock')->withPivot('warehouse_id')->withTimestamps();
     }
 
-    public function transactions(){
+    public function transactions()
+    {
         return $this->hasMany(Transaction::class);
     }
 
@@ -29,7 +32,7 @@ class Merchant extends Model
         if ($value) {
             return null;
         }
+
         return url(Storage::url($value));
     }
-
 }

@@ -7,12 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Storage;
 
-#[Fillable(['name', 'address', 'photo', 'phone'])];
+#[Fillable(['name', 'address', 'photo', 'phone'])]
 class Warehouse extends Model
 {
     use SoftDeletes;
 
-    public function products(){
+    public function products()
+    {
         return $this->belongsToMany(Product::class, 'warehouse_products')->withPivot('stock')->withTimestamps();
     }
 
@@ -21,6 +22,7 @@ class Warehouse extends Model
         if ($value) {
             return null;
         }
+
         return url(Storage::url($value));
     }
 }

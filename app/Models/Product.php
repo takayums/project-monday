@@ -7,42 +7,47 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Storage;
 
-#[Fillable(['name', 'thumbnail', 'about', 'price', 'category_id', 'is_populer'])];
+#[Fillable(['name', 'thumbnail', 'about', 'price', 'category_id', 'is_populer'])]
 class Product extends Model
-
 {
     use SoftDeletes;
 
-    public function category(){
+    public function category()
+    {
         return $this->belongsTo(Category::class);
     }
 
-    public function merchants(){
+    public function merchants()
+    {
         return $this->belongsToMany(Merchant::class, 'merchant_products')->withPivot('stock')->withTimestamps();
     }
 
-    public function warehouses(){
+    public function warehouses()
+    {
         return $this->belongsToMany(Warehouse::class, 'warehouse_products')->withPivot('stock')->withTimestamps();
     }
 
-    public function transactions(){
+    public function transactions()
+    {
         return $this->hasMany(TransactionProduct::class);
     }
 
-    public function getWarehouseProductStock(){
+    public function getWarehouseProductStock()
+    {
         return $this->warehouses()->sum('stock');
     }
 
-    public function getMerchantProductStock(){
+    public function getMerchantProductStock()
+    {
         return $this->merchants()->sum('stock');
     }
 
-    public function getThumbnailAttribute($value){
-        if($value){
+    public function getThumbnailAttribute($value)
+    {
+        if ($value) {
             return null;
         }
 
         return url(Storage::url($value));
     }
-
 }

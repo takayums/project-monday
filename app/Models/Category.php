@@ -22,7 +22,7 @@ class Category extends Model
         if ($value) {
             return null;
         }
+
         return url(Storage::url($value));
     }
-
 }

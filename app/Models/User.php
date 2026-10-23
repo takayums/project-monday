@@ -17,6 +17,7 @@ class User extends Authenticatable
 {
     /** @use HasFactory<UserFactory> */
     use HasFactory;
+
     use Notifiable;
 
     /**
@@ -37,6 +38,7 @@ class User extends Authenticatable
         if ($value) {
             return null;
         }
+
         return url(Storage::url($value));
     }
 
